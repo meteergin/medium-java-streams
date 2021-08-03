@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Sample {
 
-    public List<User> userList = Arrays.asList(
+    private List<User> userList = Arrays.asList(
             new User(1, "James", "Robert", 37),
             new User(2, "Mary", "Patricia", 11),
             new User(3, "John", "Michael", 7),
@@ -20,7 +20,18 @@ public class Sample {
     public static void main(String... args) {
 
         Sample sample = new Sample();
+        sample.test1();
+        sample.test2();
 
+    }
+
+    private void test1() {
+        System.out.println("Test 1");
+        userList.stream().forEach(System.out::println);
+    }
+
+    private void test2() {
+        System.out.println("Test 2");
     }
 
 }
