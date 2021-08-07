@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 public class Sample {
 
     private final List<User> userList = Arrays.asList(
-            new User(1, "Michael", "Robert", 37),
-            new User(2, "Mary", "Patricia", 11),
-            new User(3, "John", "Michael", 7),
-            new User(4, "Jennifer", "Linda", 77),
-            new User(5, "William", "Elizabeth", 23),
-            new User(6, "Sue", "Jackson", 11),
-            new User(7, "Michael", "Tommy", 37)
+            new User(1, "Michael", "Robert", 37, "TR"),
+            new User(2, "Mary", "Patricia", 11, "EN"),
+            new User(3, "John", "Michael", 7, "FR"),
+            new User(4, "Jennifer", "Linda", 77, "TR"),
+            new User(5, "William", "Elizabeth", 23, "US"),
+            new User(6, "Sue", "Jackson", 11, "IT"),
+            new User(7, "Michael", "Tommy", 37, "EN")
     );
 
     public static void main(String... args) {
@@ -34,6 +34,8 @@ public class Sample {
         sample.test6();
         sample.test7();
         sample.test8();
+        sample.test9();
+        sample.test10();
     }
 
     private void test1() {
@@ -52,7 +54,8 @@ public class Sample {
                             u.getId(),
                             "X " + u.getFirstName(),
                             "Y " + u.getLastName(),
-                            u.getAge() + 10);
+                            u.getAge() + 10,
+                            u.getNationality());
                 })
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
@@ -129,6 +132,27 @@ public class Sample {
 
         Map<Long, User> map = userList.stream()
                 .collect(Collectors.toMap(user -> user.getId(), user -> user));
+    }
+
+    private void test9() {
+        System.out.println("Test 9");
+
+        long countDifferentNationalites = userList.stream()
+                .map(User::getNationality)
+                .distinct()
+                .count();
+
+        System.out.println("countDifferentNationalites: " + countDifferentNationalites);
+    }
+
+    private void test10() {
+        System.out.println("Test 10");
+
+        userList.stream()
+                .filter(p -> (p.getFirstName().charAt(0) != 'M'))
+                .filter(p -> (p.getAge() > 10))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
     }
 
 }
